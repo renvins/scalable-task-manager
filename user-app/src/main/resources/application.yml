@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: scalable-task-manager-user-app
+  datasource: # To automatically set datasource info for Spring
+    url: jdbc:postgresql://localhost:5432/stm_db
+    driver-class-name: org.postgresql.Driver
+    username: postgres
+    password: admin
+springdoc:
+  api-docs:
+    enabled: false
+  swagger-ui:
+    url: /api/swagger.yml
+logging:
+  level:
+    org.springframework: debug

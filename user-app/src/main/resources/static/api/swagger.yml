@@ -1,0 +1,36 @@
+openapi: 3.0.3
+info:
+  title: Scalable Task Manager User App
+  version: "1.0"
+paths:
+  /v1/register:
+    post:
+      tags:
+        - register
+      summary: Registers a new user
+      operationId: registerUser
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RegisterUserDTO"
+      responses:
+        200:
+          description: "Server was successfully registered"
+        400:
+          description: "Client did not send the server info correctly"
+        500:
+          description: "A generic backend error occurred"
+components:
+  schemas:
+    RegisterUserDTO:
+      type: object
+      required:
+        - username
+        - password
+      properties:
+        username:
+          type: string
+        password:
+          type: string

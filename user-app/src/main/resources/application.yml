@@ -11,6 +11,3 @@ springdoc:
     enabled: false
   swagger-ui:
     url: /api/swagger.yml
-logging:
-  level:
-    org.springframework: debug

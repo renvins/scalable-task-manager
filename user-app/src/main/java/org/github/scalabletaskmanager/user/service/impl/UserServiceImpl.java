@@ -45,4 +45,7 @@ public class UserServiceImpl implements UserService {
         }
         return user.getPassword().equals(password);
     }
+
+    public void updatePassword(String username, String password) {
+    }
 }

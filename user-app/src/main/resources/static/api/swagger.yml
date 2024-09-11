@@ -17,9 +17,28 @@ paths:
               $ref: "#/components/schemas/RegisterUserDTO"
       responses:
         200:
-          description: "Server was successfully registered"
+          description: "User was successfully registered"
         400:
           description: "Client did not send the server info correctly"
+        500:
+          description: "A generic backend error occurred"
+  /v1/update:
+    put:
+      tags:
+        - update
+      summary: Update existing user
+      operationId: updateUser
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateUserDTO"
+      responses:
+        200:
+          description: "Password was successfully updated"
+        400:
+          description: "Client did not send the password correctly"
         500:
           description: "A generic backend error occurred"
 components:
@@ -33,4 +52,16 @@ components:
         username:
           type: string
         password:
+          type: string
+    UpdateUserDTO:
+      required:
+        - username
+        - password
+        - newPassword
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+        newPassword:
           type: string

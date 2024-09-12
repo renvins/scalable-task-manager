@@ -10,7 +10,7 @@ import java.util.Collection;
 import java.util.List;
 
 @Entity
-@Table(name = "users")
+@Table(name = "users", schema = "public")
 @Data
 public class UserEntity implements UserDetails {
 
@@ -30,7 +30,19 @@ public class UserEntity implements UserDetails {
     @Column(name = "password")
     private String password;
 
-    @Override
+    public @NotNull String getFullName() {
+        return fullName;
+    }
+
+    public @NotNull String getUsername() {
+        return username;
+    }
+
+    public @NotNull String getPassword() {
+        return password;
+    }
+
+    @Override @Transient
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of();
     }

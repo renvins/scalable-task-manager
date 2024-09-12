@@ -1,23 +1,35 @@
 package org.github.scalabletaskmanager.user.service;
 
+
+import org.github.scalabletaskmanager.gen.model.LoginUserDTO;
 import org.github.scalabletaskmanager.gen.model.RegisterUserDTO;
+import org.github.scalabletaskmanager.gen.model.UpdateUserDTO;
 
 public interface UserService {
 
     /**
-     * Registers a new user with the details provided in the RegisterUserDTO.
+     * Registers a new user with the provided registration details.
      *
-     * @param registerUser the data transfer object containing user registration information
+     * @param registerUser an instance of RegisterUserDTO containing the user registration details.
+     * @return a string representing the result of the registration process.
      */
-    void register(RegisterUserDTO registerUser);
+    String register(RegisterUserDTO registerUser);
 
 
     /**
-     * Authenticates a user using the provided username and password.
+     * Authenticates a user based on the provided login credentials.
      *
-     * @param username the username of the user attempting to log in
-     * @param password the password of the user attempting to log in
-     * @return true if the login credentials are valid, false otherwise
+     * @param loginUserDTO an instance of LoginUserDTO containing the user's login credentials.
+     * @return a string representing the session token or authentication status.
      */
-    boolean login(String username, String password);
+    String login(LoginUserDTO loginUserDTO);
+
+
+    /**
+     * Updates the user's password based on the provided JWT and update information.
+     *
+     * @param jwt the JSON Web Token used for authentication and authorization.
+     * @param updateUser an instance of UpdateUserDTO containing the current and new password information.
+     */
+    void updatePassword(String jwt, UpdateUserDTO updateUser);
 }

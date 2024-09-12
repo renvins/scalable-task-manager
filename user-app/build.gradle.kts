@@ -11,19 +11,17 @@ repositories {
 dependencies {
     val jacksonNullableVer = "0.2.6"
     val springdocVer = "2.5.0"
-    val guavaVer = "33.3.0-jre"
 
     implementation("org.openapitools:jackson-databind-nullable:$jacksonNullableVer")
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:$springdocVer")
 
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-actuator")
+
     implementation("org.springframework.boot:spring-boot-starter-security")
 
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.springframework.boot:spring-boot-starter-validation") // For entities validation
-
-    implementation("com.google.guava:guava:$guavaVer") // For hashing
 
     // JWT
     implementation("io.jsonwebtoken:jjwt-api:0.11.5")

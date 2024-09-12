@@ -1,25 +1,25 @@
 package org.github.scalabletaskmanager.user.controller;
 
-import org.github.scalabletaskmanager.gen.api.RegisterAPI;
-import org.github.scalabletaskmanager.gen.model.RegisterUserDTO;
+import org.github.scalabletaskmanager.gen.api.LoginAPI;
+import org.github.scalabletaskmanager.gen.model.LoginUserDTO;
 import org.github.scalabletaskmanager.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class RegisterController implements RegisterAPI {
+public class LoginController implements LoginAPI {
 
     private final UserService userService;
 
     @Autowired
-    public RegisterController(UserService userService) {
+    public LoginController(UserService userService) {
         this.userService = userService;
     }
 
     @Override
-    public ResponseEntity<String> registerUser(RegisterUserDTO registerUserDTO) {
-        String jwt = userService.register(registerUserDTO);
+    public ResponseEntity<String> loginUser(LoginUserDTO userDTO) {
+        String jwt = userService.login(userDTO);
         return ResponseEntity.ok(jwt);
     }
 }

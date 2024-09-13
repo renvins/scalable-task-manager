@@ -1,0 +1,16 @@
+openapi: 3.1.0
+info:
+  title: Scalable Task Manager Task App
+  version: "1.0"
+components:
+  schemas:
+    UserDTO:
+      type: object
+      required:
+        - fullName
+        - username
+      properties:
+        fullName:
+          type: string
+        username:
+          type: string

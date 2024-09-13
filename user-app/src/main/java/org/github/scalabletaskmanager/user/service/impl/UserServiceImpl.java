@@ -1,12 +1,12 @@
 package org.github.scalabletaskmanager.user.service.impl;
 
 import lombok.extern.slf4j.Slf4j;
-import org.github.scalabletaskmanager.gen.model.LoginUserDTO;
-import org.github.scalabletaskmanager.gen.model.RegisterUserDTO;
-import org.github.scalabletaskmanager.gen.model.UpdateUserDTO;
+import org.github.scalabletaskmanager.common.JwtService;
 import org.github.scalabletaskmanager.user.exception.UserAlreadyExistsException;
 import org.github.scalabletaskmanager.user.exception.UserNotFoundException;
-import org.github.scalabletaskmanager.user.service.JwtService;
+import org.github.scalabletaskmanager.user.gen.model.LoginUserDTO;
+import org.github.scalabletaskmanager.user.gen.model.RegisterUserDTO;
+import org.github.scalabletaskmanager.user.gen.model.UpdateUserDTO;
 import org.github.scalabletaskmanager.user.service.UserService;
 import org.github.scalabletaskmanager.user.sql.UserEntity;
 import org.github.scalabletaskmanager.user.sql.UserRepository;

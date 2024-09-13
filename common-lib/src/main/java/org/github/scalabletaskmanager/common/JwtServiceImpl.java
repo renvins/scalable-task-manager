@@ -1,11 +1,10 @@
-package org.github.scalabletaskmanager.user.service.impl;
+package org.github.scalabletaskmanager.common;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
-import org.github.scalabletaskmanager.user.service.JwtService;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 

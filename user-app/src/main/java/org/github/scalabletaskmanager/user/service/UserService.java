@@ -1,9 +1,8 @@
 package org.github.scalabletaskmanager.user.service;
 
-
-import org.github.scalabletaskmanager.gen.model.LoginUserDTO;
-import org.github.scalabletaskmanager.gen.model.RegisterUserDTO;
-import org.github.scalabletaskmanager.gen.model.UpdateUserDTO;
+import org.github.scalabletaskmanager.user.gen.model.LoginUserDTO;
+import org.github.scalabletaskmanager.user.gen.model.RegisterUserDTO;
+import org.github.scalabletaskmanager.user.gen.model.UpdateUserDTO;
 
 public interface UserService {
 

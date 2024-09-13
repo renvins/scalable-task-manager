@@ -1,7 +1,7 @@
 package org.github.scalabletaskmanager.user.controller;
 
-import org.github.scalabletaskmanager.gen.api.RegisterAPI;
-import org.github.scalabletaskmanager.gen.model.RegisterUserDTO;
+import org.github.scalabletaskmanager.user.gen.api.RegisterAPI;
+import org.github.scalabletaskmanager.user.gen.model.RegisterUserDTO;
 import org.github.scalabletaskmanager.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

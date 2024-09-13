@@ -1,5 +1,7 @@
 package org.github.scalabletaskmanager.user;
 
+import org.github.scalabletaskmanager.common.JwtService;
+import org.github.scalabletaskmanager.common.JwtServiceImpl;
 import org.github.scalabletaskmanager.user.sql.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -36,5 +38,10 @@ public class UserAppConfig {
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
         return configuration.getAuthenticationManager();
+    }
+
+    @Bean
+    public JwtService jwtService() {
+        return new JwtServiceImpl();
     }
 }

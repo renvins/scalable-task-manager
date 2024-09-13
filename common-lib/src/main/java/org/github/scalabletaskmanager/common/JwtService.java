@@ -1,4 +1,4 @@
-package org.github.scalabletaskmanager.user.service;
+package org.github.scalabletaskmanager.common;
 
 import io.jsonwebtoken.Claims;
 import org.springframework.security.core.userdetails.UserDetails;

@@ -4,17 +4,18 @@ plugins {
     id("org.openapi.generator") version ("7.8.0")
 }
 
+repositories {
+    mavenCentral()
+}
+
 dependencies {
     val jacksonNullableVer = "0.2.6"
     val springdocVer = "2.5.0"
-
-    api(project(":common-lib"))
 
     implementation("org.openapitools:jackson-databind-nullable:$jacksonNullableVer")
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:$springdocVer")
 
     implementation("org.springframework.boot:spring-boot-starter-web")
-    implementation("org.springframework.boot:spring-boot-starter-security")
 
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.springframework.boot:spring-boot-starter-validation") // For entities validation
@@ -43,8 +44,8 @@ tasks.openApiGenerate {
     generatorName.set("spring")
     library.set("spring-boot")
 
-    apiPackage.set("org.github.scalabletaskmanager.user.gen.api")
-    modelPackage.set("org.github.scalabletaskmanager.user.gen.model")
+    apiPackage.set("org.github.scalabletaskmanager.task.gen.api")
+    modelPackage.set("org.github.scalabletaskmanager.task.gen.model")
     apiNameSuffix.set("API")
     cleanupOutput.set(true)
 

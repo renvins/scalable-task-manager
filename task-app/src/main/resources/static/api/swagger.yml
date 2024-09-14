@@ -1,15 +1,66 @@
-openapi: 3.1.0
+openapi: 3.0.3
 info:
   title: Scalable Task Manager Task App
   version: "1.0"
+paths:
+  /v1/tasks:
+    post:
+      tags:
+        - create
+      summary: Creates a new user
+      operationId: createTask
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TaskDTO"
+      responses:
+        200:
+          description: "User was successfully registered"
+          content:
+            text/plain:
+              schema:
+                type: string
+        400:
+          description: "Client did not send the server info correctly"
+        500:
+          description: "A generic backend error occurred"
 components:
   schemas:
+    TaskDTO:
+      type: object
+      required:
+        - title
+        - description
+        - status
+        - creatorId
+        - creatorUsername
+        - creatorFullName
+      properties:
+        title:
+          type: string
+        description:
+          type: string
+        status:
+          type: string
+        creatorId:
+          type: integer
+          format: int64
+        creatorUsername:
+          type: string
+        creatorFullName:
+          type: string
     UserDTO:
       type: object
       required:
+        - id
         - fullName
         - username
       properties:
+        id:
+          type: integer
+          format: int64
         fullName:
           type: string
         username:

@@ -3,6 +3,7 @@ package org.github.scalabletaskmanager.user.service;
 import org.github.scalabletaskmanager.user.gen.model.LoginUserDTO;
 import org.github.scalabletaskmanager.user.gen.model.RegisterUserDTO;
 import org.github.scalabletaskmanager.user.gen.model.UpdateUserDTO;
+import org.github.scalabletaskmanager.user.sql.UserEntity;
 
 public interface UserService {
 
@@ -31,4 +32,12 @@ public interface UserService {
      * @param updateUser an instance of UpdateUserDTO containing the current and new password information.
      */
     void updatePassword(String jwt, UpdateUserDTO updateUser);
+
+    /**
+     * Retrieves a user based on the provided username.
+     *
+     * @param username the username of the user to retrieve.
+     * @return the UserEntity corresponding to the provided username.
+     */
+    UserEntity getUserByUsername(String username);
 }

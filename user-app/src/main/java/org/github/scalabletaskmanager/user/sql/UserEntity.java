@@ -14,6 +14,16 @@ import java.util.List;
 @Data
 public class UserEntity implements UserDetails {
 
+    public UserEntity() {
+    }
+
+    public UserEntity(long id, String fullName, String username, String password) {
+        this.id = id;
+        this.fullName = fullName;
+        this.username = username;
+        this.password = password;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;

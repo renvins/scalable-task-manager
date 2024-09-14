@@ -1,4 +1,4 @@
-package org.github.scalabletaskmanager.user.exception;
+package org.github.scalabletaskmanager.common.exception;
 
 public class UserNotFoundException extends RuntimeException {
 

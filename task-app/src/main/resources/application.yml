@@ -19,3 +19,8 @@ springdoc:
     enabled: false
   swagger-ui:
     url: /api/swagger.yml
+server:
+  port: 8081
+user:
+  service:
+    url: http://localhost:8080

@@ -25,7 +25,8 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http, AuthenticationManager authenticationManager) throws Exception { // Method injection
         http.csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(manager -> manager.requestMatchers("/v1/auth/register", "v1/auth/login") // All requests inside are permitted
+                .authorizeHttpRequests(manager -> manager.requestMatchers("/v1/auth/register",
+                                "v1/auth/login", "/v1/users") // All requests inside are permitted
                         .permitAll()
                         .anyRequest() // All other requests
                         .authenticated());

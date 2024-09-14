@@ -3,7 +3,7 @@ package org.github.scalabletaskmanager.user.service.impl;
 import lombok.extern.slf4j.Slf4j;
 import org.github.scalabletaskmanager.common.JwtService;
 import org.github.scalabletaskmanager.user.exception.UserAlreadyExistsException;
-import org.github.scalabletaskmanager.user.exception.UserNotFoundException;
+import org.github.scalabletaskmanager.common.exception.UserNotFoundException;
 import org.github.scalabletaskmanager.user.gen.model.LoginUserDTO;
 import org.github.scalabletaskmanager.user.gen.model.RegisterUserDTO;
 import org.github.scalabletaskmanager.user.gen.model.UpdateUserDTO;
@@ -52,7 +52,7 @@ public class UserServiceImpl implements UserService {
 
         userRepository.save(user);
 
-        String jwt = jwtService.generateToken(new HashMap<>(), user);
+        String jwt = jwtService.generateToken(new HashMap<>(), user.getUsername());
         log.info("User {} registered successfully!", registerUser.getUsername());
 
         return jwt;
@@ -67,9 +67,9 @@ public class UserServiceImpl implements UserService {
 
         UserEntity user = userRepository.findByUsername(loginUserDTO.getUsername());
         if (user == null) {
-            throw new UserNotFoundException("User not found!");
+            throw new UserNotFoundException("User " + loginUserDTO.getUsername() + " not found!");
         }
-        return jwtService.generateToken(new HashMap<>(), user);
+        return jwtService.generateToken(new HashMap<>(), user.getUsername());
     }
 
     @Override
@@ -78,11 +78,20 @@ public class UserServiceImpl implements UserService {
         UserEntity user = userRepository.findByUsername(username);
 
         if (user == null) {
-            throw new UserNotFoundException("User not found!");
+            throw new UserNotFoundException("User " + username + " not found!");
         }
         String encodedPassword = passwordEncoder.encode(updateUser.getNewPassword());
 
         user.setPassword(encodedPassword);
         userRepository.save(user);
+    }
+
+    @Override
+    public UserEntity getUserByUsername(String username) {
+        UserEntity user = userRepository.findByUsername(username);
+        if (user == null) {
+            throw new UserNotFoundException("User " + username + " not found!");
+        }
+        return user;
     }
 }

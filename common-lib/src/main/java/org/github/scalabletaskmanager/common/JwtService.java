@@ -1,7 +1,6 @@
 package org.github.scalabletaskmanager.common;
 
 import io.jsonwebtoken.Claims;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Map;
 import java.util.function.Function;
@@ -27,20 +26,20 @@ public interface JwtService {
     <T> T extractClaim(String token, Function<Claims, T> claimsResolver);
 
     /**
-     * Generates a JWT token for the given user with additional claims.
+     * Generates a JWT token for the specified user with additional claims.
      *
-     * @param extraClaims additional claims to be included in the token
-     * @param userDetails the user details for whom the token is being generated
+     * @param extraClaims a map containing additional claims to be included in the token
+     * @param username the username for which the token is to be generated
      * @return the generated JWT token as a string
      */
-    String generateToken(Map<String, Object> extraClaims, UserDetails userDetails);
+    String generateToken(Map<String, Object> extraClaims, String username);
 
     /**
-     * Checks whether the provided JWT token is valid for the given user details.
+     * Validates the given JWT token by comparing the extracted username with the provided username.
      *
-     * @param token       the JWT token to validate
-     * @param userDetails the user details to validate against
-     * @return true if the token is valid, false otherwise
+     * @param token the JWT token to be validated
+     * @param comparedUsername the username to compare against the username extracted from the token
+     * @return true if the token is valid and the usernames match, false otherwise
      */
-    boolean isTokenValid(String token, UserDetails userDetails);
+    boolean isTokenValid(String token, String comparedUsername);
 }

@@ -12,6 +12,8 @@ dependencies {
     val jacksonNullableVer = "0.2.6"
     val springdocVer = "2.5.0"
 
+    api(project(":common-lib"))
+
     implementation("org.openapitools:jackson-databind-nullable:$jacksonNullableVer")
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:$springdocVer")
 
@@ -39,7 +41,7 @@ sourceSets {
 }
 
 tasks.openApiGenerate {
-    inputSpec.set("$rootDir/user-app/src/main/resources/static/api/swagger.yml")
+    inputSpec.set("$rootDir/task-app/src/main/resources/static/api/swagger.yml")
 
     generatorName.set("spring")
     library.set("spring-boot")

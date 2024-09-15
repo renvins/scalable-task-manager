@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
@@ -25,11 +26,16 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http, AuthenticationManager authenticationManager) throws Exception { // Method injection
         http.csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(manager -> manager.requestMatchers("/v1/auth/register",
-                                "v1/auth/login", "/v1/users") // All requests inside are permitted
-                        .permitAll()
-                        .anyRequest() // All other requests
-                        .authenticated());
+                .authorizeHttpRequests(manager -> {
+                    manager.requestMatchers("/v1/auth/**", "/v1/users/**").permitAll();
+                    manager.requestMatchers(new AntPathRequestMatcher("/v3/api-docs/**","GET"),
+                            new AntPathRequestMatcher("/swagger-ui/**","GET"),
+                            new AntPathRequestMatcher("/swagger-ui.html","GET"),
+                            new AntPathRequestMatcher("/api/swagger.yml", "GET"))
+                            .permitAll();
+
+                    manager.anyRequest().authenticated();
+                });
 
         // Stateless because every request needs authentication
         http.sessionManagement(sessionManagement -> sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS));

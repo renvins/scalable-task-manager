@@ -1,7 +1,7 @@
 package org.github.scalabletaskmanager.user.controller;
 
 import org.github.scalabletaskmanager.common.exception.UserNotFoundException;
-import org.github.scalabletaskmanager.user.gen.api.DefaultAPI;
+import org.github.scalabletaskmanager.user.gen.api.GetAPI;
 import org.github.scalabletaskmanager.user.gen.model.UserDTO;
 import org.github.scalabletaskmanager.user.service.UserService;
 import org.github.scalabletaskmanager.user.sql.UserEntity;
@@ -11,7 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class GetUserController implements DefaultAPI {
+public class GetUserController implements GetAPI {
 
     private final UserService userService;
 

@@ -16,6 +16,6 @@ spring:
         implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
 springdoc:
   api-docs:
-    enabled: false
+    enabled: true
   swagger-ui:
     url: /api/swagger.yml

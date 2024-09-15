@@ -2,6 +2,8 @@ package org.github.scalabletaskmanager.task.service;
 
 import org.github.scalabletaskmanager.task.gen.model.TaskDTO;
 
+import java.util.List;
+
 public interface TaskService {
 
     /**
@@ -12,4 +14,11 @@ public interface TaskService {
      * @return the newly created TaskDTO containing the persisted task details
      */
     TaskDTO createTask(TaskDTO taskDTO, String jwt);
+
+    /**
+     * Retrieves a list of all tasks.
+     *
+     * @return a list of TaskDTO objects representing the tasks
+     */
+    List<TaskDTO> getTasks();
 }

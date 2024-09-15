@@ -6,7 +6,7 @@ paths:
   /v1/auth/register:
     post:
       tags:
-        - register
+        - auth
       summary: Registers a new user
       operationId: registerUser
       requestBody:
@@ -29,7 +29,7 @@ paths:
   /v1/auth/login:
     post:
       tags:
-        - login
+        - auth
       summary: Login a user
       operationId: loginUser
       requestBody:
@@ -51,10 +51,10 @@ paths:
           description: "User or password weren't correct"
         500:
           description: "A generic backend error occurred"
-  /v1/users/update:
+  /v1/auth/update:
     put:
       tags:
-        - update
+        - auth
       summary: Update existing user
       operationId: updateUser
       requestBody:
@@ -68,12 +68,16 @@ paths:
           description: "Password was successfully updated"
         400:
           description: "Client did not send the password correctly"
+        403:
+          description: "Authentication failed"
         500:
           description: "A generic backend error occurred"
   /v1/users/{username}:
     get:
       summary: Get existing user
       operationId: getUser
+      tags:
+        - get
       parameters:
         - in: path
           name: username
@@ -90,8 +94,6 @@ paths:
                 $ref: "#/components/schemas/UserDTO"
         400:
           description: "Client did not send the server info correctly"
-        403:
-          description: "User or password weren't correct"
         500:
           description: "A generic backend error occurred"
 components:

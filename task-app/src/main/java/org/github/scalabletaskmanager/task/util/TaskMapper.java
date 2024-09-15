@@ -15,4 +15,9 @@ public class TaskMapper {
         taskDTO.setCreatorInfo(userDTO);
         return taskDTO;
     }
+
+    public static TaskDTO toDTO(TaskEntity taskEntity) {
+        UserDTO userDTO = new UserDTO(taskEntity.getCreatorId(), taskEntity.getCreatorFullName(), taskEntity.getCreatorUsername());
+        return toDTO(taskEntity, userDTO);
+    }
 }

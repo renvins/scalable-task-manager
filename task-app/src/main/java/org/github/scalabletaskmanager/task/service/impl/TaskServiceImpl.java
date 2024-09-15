@@ -14,6 +14,8 @@ import org.github.scalabletaskmanager.task.util.TaskMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class TaskServiceImpl implements TaskService {
 
@@ -52,5 +54,10 @@ public class TaskServiceImpl implements TaskService {
         taskRepository.save(taskEntity);
 
         return TaskMapper.toDTO(taskEntity, userDTO);
+    }
+
+    @Override
+    public List<TaskDTO> getTasks() {
+        return taskRepository.findAll().stream().map(TaskMapper::toDTO).toList();
     }
 }

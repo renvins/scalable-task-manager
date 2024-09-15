@@ -22,7 +22,7 @@ public class UserClientImpl implements UserClient {
 
     @Override
     public UserDTO getUserByUsername(String username) {
-        String url = userUrl + "/users/" + username;
+        String url = userUrl + "/v1/users/" + username;
         ResponseEntity<UserDTO> response = restTemplate.getForEntity(url, UserDTO.class);
 
         return response.getBody();

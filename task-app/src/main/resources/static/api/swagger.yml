@@ -4,6 +4,24 @@ info:
   version: "1.0"
 paths:
   /v1/tasks:
+    get:
+      tags:
+        - get
+      operationId: getTasks
+      summary: Get all tasks
+      responses:
+        200:
+          description: "Tasks were successfully retrieved"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/TaskDTO"
+        403:
+          description: "Authentication failed"
+        500:
+          description: "A generic backend error occurred"
     post:
       tags:
         - create

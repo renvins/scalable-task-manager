@@ -18,7 +18,7 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/TaskDTO"
-        403:
+        401:
           description: "Authentication failed"
         500:
           description: "A generic backend error occurred"

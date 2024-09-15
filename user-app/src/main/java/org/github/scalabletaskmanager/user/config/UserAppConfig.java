@@ -1,7 +1,8 @@
-package org.github.scalabletaskmanager.user;
+package org.github.scalabletaskmanager.user.config;
 
-import org.github.scalabletaskmanager.common.JwtService;
-import org.github.scalabletaskmanager.common.JwtServiceImpl;
+import org.github.scalabletaskmanager.common.security.JwtAuthFilter;
+import org.github.scalabletaskmanager.common.service.JwtService;
+import org.github.scalabletaskmanager.common.service.impl.JwtServiceImpl;
 import org.github.scalabletaskmanager.user.sql.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -29,7 +30,7 @@ public class UserAppConfig {
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder(); // One implementation of PasswordEncoder
+        return new BCryptPasswordEncoder();
     }
 
     @Bean
@@ -40,5 +41,10 @@ public class UserAppConfig {
     @Bean
     public JwtService jwtService() {
         return new JwtServiceImpl();
+    }
+
+    @Bean
+    public JwtAuthFilter jwtAuthFilter(JwtService jwtService) {
+        return new JwtAuthFilter(jwtService);
     }
 }

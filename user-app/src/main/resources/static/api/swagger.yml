@@ -47,7 +47,7 @@ paths:
                 type: string
         400:
           description: "Client did not send the server info correctly"
-        403:
+        401:
           description: "User or password weren't correct"
         500:
           description: "A generic backend error occurred"
@@ -68,7 +68,7 @@ paths:
           description: "Password was successfully updated"
         400:
           description: "Client did not send the password correctly"
-        403:
+        401:
           description: "Authentication failed"
         500:
           description: "A generic backend error occurred"

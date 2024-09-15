@@ -1,4 +1,4 @@
-package org.github.scalabletaskmanager.common;
+package org.github.scalabletaskmanager.common.service;
 
 import io.jsonwebtoken.Claims;
 
@@ -35,11 +35,10 @@ public interface JwtService {
     String generateToken(Map<String, Object> extraClaims, String username);
 
     /**
-     * Validates the given JWT token by comparing the extracted username with the provided username.
+     * Checks if JWT token is expired or not.
      *
-     * @param token the JWT token to be validated
-     * @param comparedUsername the username to compare against the username extracted from the token
-     * @return true if the token is valid and the usernames match, false otherwise
+     * @param token to validate
+     * @return if it's expired or not
      */
-    boolean isTokenValid(String token, String comparedUsername);
+    boolean isTokenExpired(String token);
 }

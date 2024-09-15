@@ -1,31 +1,24 @@
-package org.github.scalabletaskmanager.user.security;
+package org.github.scalabletaskmanager.common.security;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.github.scalabletaskmanager.common.JwtService;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.github.scalabletaskmanager.common.service.JwtService;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
-import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
-@Component
 public class JwtAuthFilter extends OncePerRequestFilter {
 
     private final JwtService jwtService;
-    private final UserDetailsService userDetailsService;
 
-    @Autowired
-    public JwtAuthFilter(JwtService jwtService, UserDetailsService userDetailsService) {
+    public JwtAuthFilter(JwtService jwtService) {
         this.jwtService = jwtService;
-        this.userDetailsService = userDetailsService;
     }
 
     @Override
@@ -40,10 +33,9 @@ public class JwtAuthFilter extends OncePerRequestFilter {
         String username = jwtService.extractUsername(jwt);
 
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-            UserDetails user = userDetailsService.loadUserByUsername(username);
-            if (jwtService.isTokenValid(jwt, user.getUsername())) {
+            if (!jwtService.isTokenExpired(jwt)) {
                 UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
-                        user, null, user.getAuthorities());
+                        username, null, new ArrayList<>());
                 authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request)); // Get auth details from request
                 SecurityContextHolder.getContext().setAuthentication(authToken); // Set auth for next filter
             }

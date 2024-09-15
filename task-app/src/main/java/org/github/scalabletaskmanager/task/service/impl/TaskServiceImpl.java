@@ -1,6 +1,6 @@
 package org.github.scalabletaskmanager.task.service.impl;
 
-import org.github.scalabletaskmanager.common.JwtService;
+import org.github.scalabletaskmanager.common.service.JwtService;
 import org.github.scalabletaskmanager.common.exception.UserNotFoundException;
 import org.github.scalabletaskmanager.task.exception.TaskAlreadyExistsException;
 import org.github.scalabletaskmanager.task.gen.model.TaskDTO;

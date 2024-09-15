@@ -1,10 +1,11 @@
-package org.github.scalabletaskmanager.common;
+package org.github.scalabletaskmanager.common.service.impl;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import org.github.scalabletaskmanager.common.service.JwtService;
 
 import java.security.Key;
 import java.util.Date;
@@ -38,12 +39,7 @@ public class JwtServiceImpl implements JwtService {
     }
 
     @Override
-    public boolean isTokenValid(String token, String comparedUsername) {
-        String username = extractUsername(token);
-        return username.equals(comparedUsername) && !isTokenExpired(token);
-    }
-
-    private boolean isTokenExpired(String token) {
+    public boolean isTokenExpired(String token) {
         return extractClaim(token, Claims::getExpiration).before(new Date());
     }
 

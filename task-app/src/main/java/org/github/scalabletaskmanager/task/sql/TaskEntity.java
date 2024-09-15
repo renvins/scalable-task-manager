@@ -3,6 +3,8 @@ package org.github.scalabletaskmanager.task.sql;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.List;
+
 @Entity
 @Table(name = "tasks")
 @Data

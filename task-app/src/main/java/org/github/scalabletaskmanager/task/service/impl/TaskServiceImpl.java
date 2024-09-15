@@ -10,6 +10,7 @@ import org.github.scalabletaskmanager.task.service.UserClient;
 import org.github.scalabletaskmanager.task.sql.TaskEntity;
 import org.github.scalabletaskmanager.task.sql.TaskRepository;
 import org.github.scalabletaskmanager.task.sql.TaskStatus;
+import org.github.scalabletaskmanager.task.util.TaskMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,7 +29,7 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public TaskEntity createTask(TaskDTO taskDTO, String jwt) {
+    public TaskDTO createTask(TaskDTO taskDTO, String jwt) {
         if (taskRepository.findByTitle(taskDTO.getTitle()) != null) {
             throw new TaskAlreadyExistsException("Task " + taskDTO.getTitle() + " already exists!");
         }
@@ -50,6 +51,6 @@ public class TaskServiceImpl implements TaskService {
         taskEntity.setStatus(TaskStatus.TO_DO);
         taskRepository.save(taskEntity);
 
-        return taskEntity;
+        return TaskMapper.toDTO(taskEntity, userDTO);
     }
 }

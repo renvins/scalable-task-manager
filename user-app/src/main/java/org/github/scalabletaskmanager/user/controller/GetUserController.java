@@ -5,6 +5,7 @@ import org.github.scalabletaskmanager.user.gen.api.DefaultAPI;
 import org.github.scalabletaskmanager.user.gen.model.UserDTO;
 import org.github.scalabletaskmanager.user.service.UserService;
 import org.github.scalabletaskmanager.user.sql.UserEntity;
+import org.github.scalabletaskmanager.user.util.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,8 +26,6 @@ public class GetUserController implements DefaultAPI {
         if (user == null) {
             throw new UserNotFoundException("User " + username + " not found!");
         }
-
-        UserDTO userDTO = new UserDTO(user.getId(), user.getFullName(), user.getUsername());
-        return ResponseEntity.ok(userDTO);
+        return ResponseEntity.ok(UserMapper.toDTO(user));
     }
 }

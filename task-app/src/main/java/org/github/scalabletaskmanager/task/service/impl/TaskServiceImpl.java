@@ -36,7 +36,7 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public TaskDTO createTask(TaskDTO taskDTO, String jwt) {
         if (taskRepository.findByTitle(taskDTO.getTitle()) != null) {
-            throw new TaskAlreadyExistsException("Task " + taskDTO.getTitle() + " already exists!");
+            throw new TaskAlreadyExistsException("Task " + taskDTO.getTitle() + " already exists!", HttpStatus.CONFLICT);
         }
         String username = jwtService.extractUsername(jwt);
         UserDTO userDTO = userClient.getUserByUsername(username);
@@ -57,6 +57,15 @@ public class TaskServiceImpl implements TaskService {
         taskRepository.save(taskEntity);
 
         return TaskMapper.toDTO(taskEntity, userDTO);
+    }
+
+    @Override
+    public void deleteTask(long id) {
+        Optional<TaskEntity> task = taskRepository.findById(id);
+        if (task.isEmpty()) {
+            throw new TaskNotFoundException("Task " + id + " not found!", HttpStatus.NOT_FOUND);
+        }
+        taskRepository.delete(task.get());
     }
 
     @Override

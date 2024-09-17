@@ -8,7 +8,7 @@ paths:
       tags:
         - get
       operationId: getTasks
-      summary: Get all tasks
+      summary: Gets all tasks
       responses:
         200:
           description: "Tasks were successfully retrieved"
@@ -40,8 +40,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/TaskDTO"
-        400:
-          description: "Client did not send the server info correctly"
+        409:
+          description: "Task with this data already exists"
         500:
           description: "A generic backend error occurred"
   /v1/tasks/{id}:
@@ -68,7 +68,9 @@ paths:
         400:
           description: "Client did not send the server info correctly"
         401:
-          description: "Authentication failed"
+          description: "No authorization for this task"
+        404:
+          description: "Task not found"
         500:
           description: "A generic backend error occurred"
     delete:
@@ -90,7 +92,9 @@ paths:
         400:
           description: "Client did not send the server info correctly"
         401:
-          description: "Authentication failed"
+          description: "No authorization for this task"
+        404:
+          description: "Task not found"
         500:
           description: "A generic backend error occurred"
 

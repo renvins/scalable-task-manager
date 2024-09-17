@@ -16,6 +16,13 @@ public interface TaskService {
     TaskDTO createTask(TaskDTO taskDTO, String jwt);
 
     /**
+     * Deletes a task by its ID.
+     *
+     * @param id the ID of the task to delete
+     */
+    void deleteTask(long id);
+
+    /**
      * Retrieves a task by its ID.
      *
      * @param id the ID of the task to retrieve

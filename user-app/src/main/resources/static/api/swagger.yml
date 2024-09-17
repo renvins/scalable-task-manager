@@ -22,8 +22,8 @@ paths:
             text/plain:
               schema:
                 type: string
-        400:
-          description: "Client did not send the server info correctly"
+        409:
+          description: "User with this data already exists"
         500:
           description: "A generic backend error occurred"
   /v1/auth/login:
@@ -45,10 +45,10 @@ paths:
             text/plain:
               schema:
                 type: string
-        400:
-          description: "Client did not send the server info correctly"
         401:
           description: "User or password weren't correct"
+        404:
+          description: "User not found"
         500:
           description: "A generic backend error occurred"
   /v1/auth/update:
@@ -92,8 +92,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/UserDTO"
-        400:
-          description: "Client did not send the server info correctly"
+        404:
+          description: "User not found"
         500:
           description: "A generic backend error occurred"
 components:

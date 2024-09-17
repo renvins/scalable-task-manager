@@ -16,6 +16,14 @@ public interface TaskService {
     TaskDTO createTask(TaskDTO taskDTO, String jwt);
 
     /**
+     * Retrieves a task by its ID.
+     *
+     * @param id the ID of the task to retrieve
+     * @return the TaskDTO containing the task details
+     */
+    TaskDTO getTask(long id);
+
+    /**
      * Retrieves a list of all tasks.
      *
      * @return a list of TaskDTO objects representing the tasks

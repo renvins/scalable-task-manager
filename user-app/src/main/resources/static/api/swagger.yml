@@ -87,7 +87,7 @@ paths:
           description: Username of the user to get
       responses:
         200:
-          description: "User was successfully received"
+          description: "User was successfully retrieved"
           content:
             application/json:
               schema:

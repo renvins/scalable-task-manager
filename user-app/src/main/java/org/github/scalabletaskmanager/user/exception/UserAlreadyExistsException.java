@@ -1,12 +1,15 @@
 package org.github.scalabletaskmanager.user.exception;
 
-public class UserAlreadyExistsException extends RuntimeException {
+import org.github.scalabletaskmanager.common.exception.GlobalException;
+import org.springframework.http.HttpStatus;
 
-    public UserAlreadyExistsException(String message) {
-        super(message);
+public class UserAlreadyExistsException extends GlobalException {
+
+    public UserAlreadyExistsException(String message, HttpStatus httpStatus) {
+        super(message, httpStatus);
     }
 
-    public UserAlreadyExistsException(String message, Throwable cause) {
-        super(message, cause);
+    public UserAlreadyExistsException(String message, Throwable cause, HttpStatus httpStatus) {
+        super(message, cause, httpStatus);
     }
 }

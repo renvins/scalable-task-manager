@@ -11,6 +11,7 @@ import org.github.scalabletaskmanager.user.service.UserService;
 import org.github.scalabletaskmanager.user.sql.UserEntity;
 import org.github.scalabletaskmanager.user.sql.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -42,7 +43,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public String register(RegisterUserDTO registerUser) {
         if (userRepository.findByUsername(registerUser.getUsername()) != null) {
-            throw new UserAlreadyExistsException("User already exists!");
+            throw new UserAlreadyExistsException("User already exists!", HttpStatus.CONFLICT);
         }
         UserEntity user = new UserEntity();
 
@@ -65,21 +66,15 @@ public class UserServiceImpl implements UserService {
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
                 loginUserDTO.getUsername(), loginUserDTO.getPassword()));
 
-        UserEntity user = userRepository.findByUsername(loginUserDTO.getUsername());
-        if (user == null) {
-            throw new UserNotFoundException("User " + loginUserDTO.getUsername() + " not found!");
-        }
+        UserEntity user = getUserByUsername(loginUserDTO.getUsername());
         return jwtService.generateToken(new HashMap<>(), user.getUsername());
     }
 
     @Override
     public void updatePassword(String jwt, UpdateUserDTO updateUser) {
         String username = jwtService.extractUsername(jwt);
-        UserEntity user = userRepository.findByUsername(username);
+        UserEntity user = getUserByUsername(username);
 
-        if (user == null) {
-            throw new UserNotFoundException("User " + username + " not found!");
-        }
         String encodedPassword = passwordEncoder.encode(updateUser.getNewPassword());
 
         user.setPassword(encodedPassword);
@@ -90,7 +85,7 @@ public class UserServiceImpl implements UserService {
     public UserEntity getUserByUsername(String username) {
         UserEntity user = userRepository.findByUsername(username);
         if (user == null) {
-            throw new UserNotFoundException("User " + username + " not found!");
+            throw new UserNotFoundException("User " + username + " not found!", HttpStatus.NOT_FOUND);
         }
         return user;
     }

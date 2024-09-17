@@ -1,12 +1,14 @@
 package org.github.scalabletaskmanager.common.exception;
 
-public class UserNotFoundException extends RuntimeException {
+import org.springframework.http.HttpStatus;
 
-    public UserNotFoundException(String message) {
-        super(message);
+public class UserNotFoundException extends GlobalException {
+
+    public UserNotFoundException(String message, HttpStatus httpStatus) {
+        super(message, httpStatus);
     }
 
-    public UserNotFoundException(String message, Throwable cause) {
-        super(message, cause);
+    public UserNotFoundException(String message, Throwable cause, HttpStatus httpStatus) {
+        super(message, cause, httpStatus);
     }
 }

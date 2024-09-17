@@ -44,6 +44,56 @@ paths:
           description: "Client did not send the server info correctly"
         500:
           description: "A generic backend error occurred"
+  /v1/tasks/{id}:
+    get:
+      tags:
+        - get
+      summary: Gets a task
+      operationId: getTask
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Id of the task
+      responses:
+        200:
+          description: "Task was successfully retrieved"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TaskDTO"
+        400:
+          description: "Client did not send the server info correctly"
+        401:
+          description: "Authentication failed"
+        500:
+          description: "A generic backend error occurred"
+    delete:
+      tags:
+        - delete
+      summary: Deletes a task
+      operationId: deleteTask
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+            format: int64
+          description: Id of the task
+          required: true
+      responses:
+        200:
+          description: "Task was successfully deleted"
+        400:
+          description: "Client did not send the server info correctly"
+        401:
+          description: "Authentication failed"
+        500:
+          description: "A generic backend error occurred"
+
 components:
   schemas:
     TaskDTO:

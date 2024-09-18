@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-app-deployment
+spec:
+  replicas: 3 # Set as like as you want
+  selector:
+    matchLabels:
+      app: user-app
+  template:
+    metadata:
+      name: user-pod
+      labels:
+        app: user-app
+    spec:
+      containers:
+        - name: user-container
+          image: renvins/user-app:latest
+          ports:
+          - containerPort: 8080
+          imagePullPolicy: Always
+          env:
+            - name: POSTGRES_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: postgres-config
+                  key: host
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-credentials
+                  key: user
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-credentials
+                  key: password
